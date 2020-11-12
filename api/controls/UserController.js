@@ -1,6 +1,7 @@
 "use strict";
 const Users = require("../models/Users");
 const attributesUser = ["userid", "level"];
+const { Op } = require("sequelize");
 const typeSearch = {
   1: "username",
 };
@@ -24,16 +25,14 @@ module.exports = {
     // const { limit, offset } = getPagination(page, size);
     Users.findAndCountAll({
       attributes: attributesUser,
-      order:[['level', 'DESC'],],
-      //   where: {
-      //     search: sequelize.where(
-      //       sequelize.fn("LOWER", sequelize.col(typeSearch[type])),
-      //       "LIKE",
-      //       "%" + search + "%"
-      //     ),
-      //   },
+      order: [["level", "DESC"]],
+      where: {
+        userid: {
+          [Op.lt]: 9000000000000000001,
+        },
+      },
       limit: 20,
-      offset: 15,
+      offset: 0,
     })
       .then((data) => {
         res.status(200).send(data);

@@ -8,14 +8,14 @@ const testing = {
     timezone: "+07:00",
     port: "23306",
   },
-  // log: {
-  //   database: process.env.DB_NAME_LOG_TEST || "log",
-  //   username: process.env.DB_USER || "root",
-  //   password: process.env.DB_PASS || "",
-  //   host: process.env.DB_HOST || "localhost",
-  //   dialect: "mysql",
-  //   timezone: "+07:00",
-  // },
+  log: {
+    database: process.env.DATABASE_LOG_NAME || "log",
+    username: process.env.DATABASE_LOG_USER || "root",
+    password: process.env.DATABASE_LOG_PASS || "",
+    host: process.env.DATABASE_LOG_HOST || "localhost",
+    dialect: "mysql",
+    timezone: "+07:00",
+  },
 };
 
 const production = {
