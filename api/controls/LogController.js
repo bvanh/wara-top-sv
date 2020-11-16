@@ -15,9 +15,17 @@ module.exports = {
     LogCharges.findAndCountAll({
       attributes: attributesCharges,
       group: ["game_user_id"],
+      include: [
+        {
+          model: UserInfo,
+          // where: {
+          //     userId: 1
+          // }
+        },
+      ],
       where: {
         partner_id: "A5173E6F-A2FF-4424-88E9-DA532346D738",
-      //   game_user_id: "201088",
+        //   game_user_id: "201088",
       },
       //   limit: 35,
       offset: 0,
