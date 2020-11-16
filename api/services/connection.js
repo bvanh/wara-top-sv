@@ -8,6 +8,15 @@ const testing = {
     timezone: "+07:00",
     port: "23306",
   },
+  master: {
+    database: process.env.DATABASE_MASTER_NAME,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    host: process.env.DATABASE_HOST,
+    dialect: "mysql",
+    timezone: "+07:00",
+    port: "23306",
+  },
   log: {
     database: process.env.DATABASE_LOG_NAME || "log",
     username: process.env.DATABASE_LOG_USER || "root",

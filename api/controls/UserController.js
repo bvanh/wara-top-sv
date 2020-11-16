@@ -1,10 +1,10 @@
 "use strict";
-const Users = require("../models/Users");
+const { User } = require("../models/Users");
 const attributesUser = ["userid", "level"];
 const { Op } = require("sequelize");
 module.exports = {
   getUsers: async (req, res, next) => {
-    Users.findAndCountAll({
+    User.findAndCountAll({
       attributes: attributesUser,
       order: [["level", "DESC"]],
       where: {
