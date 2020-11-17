@@ -20,4 +20,4 @@ const UserInfo = squelize.master.define(
 // UserInfo.associate = (models) => {
 //   UserInfo.hasMany(LogCharges.log_partner_charges, { foreignKey: "userid" });
 // };
-module.exports = { User, UserInfo };
+module.exports = { User };

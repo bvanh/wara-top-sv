@@ -1,28 +1,21 @@
 "use strict";
-const LogCharges = require("../models/Log");
+const { Log, UserInfo } = require("../models/Log");
+const UserProfiles = require("../models/UserProfiles");
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
-const { UserInfo } = require("../models/Users");
 const attributesCharges = [
   "game_user_id",
-  // "nickname",
+  //  "nickname",
   [sequelize.fn("sum", sequelize.col("cash")), "total_cash"],
 ];
 // UserInfo.belongsTo(LogCharges, { foreignKey: "userid" });
 // LogCharges.hasMany(UserInfo, { foreignKey: "userid" });
 module.exports = {
   getUsersCharges: async (req, res, next) => {
-    LogCharges.findAndCountAll({
+    Log.findAll({
       attributes: attributesCharges,
       group: ["game_user_id"],
-      include: [
-        {
-          model: UserInfo,
-          // where: {
-          //     userId: 1
-          // }
-        },
-      ],
+      include: 'company',
       where: {
         partner_id: "A5173E6F-A2FF-4424-88E9-DA532346D738",
         //   game_user_id: "201088",
