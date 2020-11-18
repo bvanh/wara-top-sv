@@ -19,15 +19,4 @@ const UserInfo = squelize.master.define(
     tableName: "t_profiles",
   }
 );
-// Log.belongsToMany(UserInfo, {
-//   through: "tutorial_tag",
-//   as: "tags",
-//   foreignKey: "game_user_id",
-// });
-
-// UserInfo.belongsToMany(Log, {
-//   through: "tutorial_tag",
-//   as: "tutorials",
-//   foreignKey: "userid",
-// });
 module.exports = { Log, UserInfo };
