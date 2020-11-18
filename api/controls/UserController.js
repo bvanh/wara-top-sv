@@ -65,8 +65,23 @@ module.exports = {
         attributes: ["pid"],
         raw: true,
       })
-      .then((task) => {
-        res.status(200).send(task);
+      .then((data) => {
+        cubegameUser
+          .findOne({
+            where: { user_id: data.pid },
+            attributes: ["username"],
+            raw: true,
+          })
+          .then((data2) => {
+            res.status(200).send(data2);
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message:
+                err.message ||
+                "Some error occurred while retrieving tutorials.",
+            });
+          });
       })
       .catch((err) => {
         res.status(500).send({
