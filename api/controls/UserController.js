@@ -59,9 +59,10 @@ module.exports = {
       });
   },
   getUserInfo: (req, res, next) => {
+    const { gameUserId } = req.query;
     waraUser
       .findOne({
-        where: { uid: "20100" },
+        where: { uid: gameUserId },
         attributes: ["pid"],
         raw: true,
       })
