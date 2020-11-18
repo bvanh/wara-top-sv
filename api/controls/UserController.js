@@ -63,6 +63,7 @@ module.exports = {
       .findOne({
         where: { uid: "20100" },
         attributes: ["pid"],
+        raw: true,
       })
       .then((task) => {
         res.status(200).send(task);
