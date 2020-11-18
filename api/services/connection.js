@@ -25,6 +25,15 @@ const testing = {
     dialect: "mysql",
     timezone: "+07:00",
   },
+  cubegame: {
+    database: process.env.DATABASE_CUBEGAME_NAME,
+    username: process.env.DATABASE_LOG_USER,
+    password: process.env.DATABASE_LOG_PASS,
+    host: process.env.DATABASE_LOG_HOST,
+    dialect: "mysql",
+    timezone: "+07:00",
+  },
+  // database: "cubegame",
 };
 
 const production = {

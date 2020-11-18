@@ -1,5 +1,5 @@
 "use strict";
-const { Log, UserInfo } = require("../models/Log");
+const { Log, UserProfiles } = require("../models/Log");
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const attributesCharges = [
@@ -26,7 +26,7 @@ module.exports = {
         const arrUserId = await data.rows.map((val) =>
           Number(val.game_user_id)
         );
-        UserInfo.findAll({
+        UserProfiles.findAll({
           attributes: ["nickname", "userid"],
           where: {
             userid: arrUserId,

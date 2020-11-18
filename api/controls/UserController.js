@@ -1,6 +1,6 @@
 "use strict";
-const { User } = require("../models/Users");
-const { UserInfo } = require("../models/Log");
+const { User, waraUser, cubegameUser } = require("../models/Users");
+const { UserProfiles } = require("../models/Log");
 const attributesUser = ["userid", "level"];
 const { Op } = require("sequelize");
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
     })
       .then((data) => {
         const arrUserId = data.map((val) => val.userid);
-        UserInfo.findAll({
+        UserProfiles.findAll({
           attributes: ["nickname", "userid"],
           where: {
             userid: arrUserId,
@@ -50,6 +50,22 @@ module.exports = {
                 "Some error occurred while retrieving tutorials.",
             });
           });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials.",
+        });
+      });
+  },
+  getUserInfo: (req, res, next) => {
+    waraUser
+      .findOne({
+        where: { uid: "20100" },
+        attributes: ["pid"],
+      })
+      .then((task) => {
+        res.status(200).send(task);
       })
       .catch((err) => {
         res.status(500).send({

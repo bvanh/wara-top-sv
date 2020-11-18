@@ -1,6 +1,6 @@
 const Squelize = require("sequelize");
 const squelize = require("../services/databases");
-//const { UserInfo } = require("./Users");
+//const { UserProfiles } = require("./Users");
 const Log = squelize.log.define(
   "Logs",
   {
@@ -10,7 +10,7 @@ const Log = squelize.log.define(
     tableName: "log_partner_charges",
   }
 );
-const UserInfo = squelize.master.define(
+const UserProfiles = squelize.master.define(
   "Users",
   {
     userid: Squelize.CHAR,
@@ -19,4 +19,4 @@ const UserInfo = squelize.master.define(
     tableName: "t_profiles",
   }
 );
-module.exports = { Log, UserInfo };
+module.exports = { Log, UserProfiles };

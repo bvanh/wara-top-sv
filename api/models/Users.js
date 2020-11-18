@@ -8,16 +8,22 @@ const User = squelize.main.define(
   },
   { tableName: "t_user_info" }
 );
-const UserInfo = squelize.master.define(
-  "Userinfo",
+const waraUser = squelize.master.define(
+  "waraUser",
   {
-    userid: Squelize.CHAR,
+    uid: Squelize.CHAR,
   },
   {
-    tableName: "t_profiles",
+    tableName: "t_user",
   }
 );
-// UserInfo.associate = (models) => {
-//   UserInfo.hasMany(LogCharges.log_partner_charges, { foreignKey: "userid" });
-// };
-module.exports = { User };
+const cubegameUser = squelize.cubegame.define(
+  "cubegameUser",
+  {
+    uid: Squelize.CHAR,
+  },
+  {
+    tableName: "users",
+  }
+);
+module.exports = { User, waraUser, cubegameUser };
