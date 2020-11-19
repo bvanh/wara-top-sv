@@ -9,4 +9,5 @@ module.exports = function (app) {
   app.route("/toplevel").get(apiUser.getUsers);
   app.route("/getuserinfo").get(apiUser.getUserInfo);
   app.route("/topcharges").get(apiLogCharges.getUsersCharges);
+  app.route("/chargesbyuser").get(apiLogCharges.getChargesByUser);
 };
