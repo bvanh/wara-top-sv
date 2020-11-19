@@ -85,10 +85,20 @@ module.exports = {
           });
       })
       .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials.",
-        });
+        switch (err.message) {
+          case "Cannot read property 'pid' of null":
+            res.status(404).send({
+              message: "Kiểm tra lại thông tin user.",
+            });
+            break;
+          default:
+            res.status(500).send({
+              message:
+                err.message ||
+                "Some error occurred while retrieving tutorials.",
+            });
+            break;
+        }
       });
   },
 };
