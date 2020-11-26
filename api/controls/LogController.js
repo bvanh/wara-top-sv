@@ -16,7 +16,10 @@ const attributesChargesByUser = [
   "cash",
   [sequelize.fn("count", sequelize.col("ref_product_name")), "times"],
 ];
-const attributesLogin = ["userid"];
+const attributesLogin = [
+  "userid",
+  [sequelize.fn("count", sequelize.col("userid")), "times"]
+];
 module.exports = {
   getUsersCharges: async (req, res, next) => {
     Log.findAll({
@@ -29,7 +32,7 @@ module.exports = {
       raw: true,
       // limit: pageSize,
       // offset: pageSize * (page - 1),
-      limit: 20,
+      limit: 100,
       offset: 0,
     })
       .then(async (data) => {
@@ -100,20 +103,22 @@ module.exports = {
       });
   },
   getListLogin: (req, res, next) => {
-    const currentTime = moment().unix();
-    const oneDayAgo = moment("2020-11-24 00:00:00").unix();
+    const currentTime = moment("2020-11-25 23:00:00").unix();
+    const oneDayAgo = moment("2020-11-25 00:00:00").unix();
     ListLogin.findAll({
       attributes: attributesLogin,
+      order: sequelize.literal("times DESC"),
+      group: ["userid"],
       //  order: sequelize.literal("times DESC"),
       where: {
         regdate: {
-          [Op.between]: [oneDayAgo,currentTime],
+          [Op.between]: [oneDayAgo, currentTime],
         },
       },
       raw: true,
       // limit: pageSize,
       // offset: pageSize * (page - 1),
-      // limit: 20,
+      limit: 100,
       offset: 0,
     })
       .then((data) => {
