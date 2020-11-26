@@ -18,7 +18,7 @@ const attributesChargesByUser = [
 ];
 const attributesLogin = [
   "userid",
-  [sequelize.fn("count", sequelize.col("userid")), "times"]
+  [sequelize.fn("count", sequelize.col("userid")), "times"],
 ];
 module.exports = {
   getUsersCharges: async (req, res, next) => {
@@ -103,6 +103,7 @@ module.exports = {
       });
   },
   getListLogin: (req, res, next) => {
+    const { times } = req.query;
     const currentTime = moment("2020-11-25 23:00:00").unix();
     const oneDayAgo = moment("2020-11-25 00:00:00").unix();
     ListLogin.findAll({
@@ -119,11 +120,11 @@ module.exports = {
       // limit: pageSize,
       // offset: pageSize * (page - 1),
       limit: 100,
-      offset: 0,
+      offset: times ? times * 100 : 0,
     })
       .then((data) => {
         res.status(200).send({
-          currentTime: currentTime,
+          currentTime: times,
           timeAgo: oneDayAgo,
           data: data,
         });
