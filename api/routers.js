@@ -10,4 +10,5 @@ module.exports = function (app) {
   app.route("/getuserinfo").get(apiUser.getUserInfo);
   app.route("/topcharges").get(apiLogCharges.getUsersCharges);
   app.route("/chargesbyuser").get(apiLogCharges.getChargesByUser);
+  app.route("/listlogin").get(apiLogCharges.getListLogin);
 };

@@ -19,4 +19,13 @@ const UserProfiles = squelize.master.define(
     tableName: "t_profiles",
   }
 );
-module.exports = { Log, UserProfiles };
+const ListLogin = squelize.login.define(
+  "Login",
+  {
+    userid: Squelize.CHAR,
+  },
+  {
+    tableName: "t_login_log",
+  }
+);
+module.exports = { Log, UserProfiles,ListLogin };

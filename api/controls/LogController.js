@@ -1,5 +1,7 @@
 "use strict";
-const { Log, UserProfiles } = require("../models/Log");
+
+const moment = require("moment");
+const { Log, UserProfiles, ListLogin } = require("../models/Log");
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const attributesCharges = [
@@ -12,9 +14,9 @@ const attributesChargesByUser = [
   "game_user_id",
   "ref_product_name",
   "cash",
-  // [sequelize.fn("sum", sequelize.col("cash")), "total_cash"],
   [sequelize.fn("count", sequelize.col("ref_product_name")), "times"],
 ];
+const attributesLogin = ["userid"];
 module.exports = {
   getUsersCharges: async (req, res, next) => {
     Log.findAll({
@@ -89,6 +91,37 @@ module.exports = {
     })
       .then((data) => {
         res.status(200).send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials.",
+        });
+      });
+  },
+  getListLogin: (req, res, next) => {
+    const currentTime = moment().unix();
+    const oneDayAgo = moment("2020-11-24 00:00:00").unix();
+    ListLogin.findAll({
+      attributes: attributesLogin,
+      //  order: sequelize.literal("times DESC"),
+      where: {
+        regdate: {
+          [Op.between]: [oneDayAgo,currentTime],
+        },
+      },
+      raw: true,
+      // limit: pageSize,
+      // offset: pageSize * (page - 1),
+      // limit: 20,
+      offset: 0,
+    })
+      .then((data) => {
+        res.status(200).send({
+          currentTime: currentTime,
+          timeAgo: oneDayAgo,
+          data: data,
+        });
       })
       .catch((err) => {
         res.status(500).send({
